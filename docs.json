@@ -38,6 +38,13 @@
             ]
           },
           {
+            "group": "Integrations",
+            "pages": [
+              "integrations/ashby",
+              "integrations/custom-field-mapping"
+            ]
+          },
+          {
             "group": "AI tools",
             "pages": [
               "ai-tools/cursor",
@@ -82,7 +89,7 @@
         },
         {
           "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
+          "href": "https://clearoffer.io/blog",
           "icon": "newspaper"
         }
       ]
@@ -96,13 +103,17 @@
     "links": [
       {
         "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "href": "mailto:support@clearoffer.io"
+      },
+      {
+        "label": "Login",
+        "href": "https://clearoffer.io/login"
       }
     ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
+      "label": "Signup",
+      "href": "https://clearoffer.io/signup"
     }
   },
   "contextual": {
@@ -119,9 +130,8 @@
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "github": "https://github.com/clearoffer",
+      "linkedin": "https://linkedin.com/company/clearoffer"
     }
   }
 }

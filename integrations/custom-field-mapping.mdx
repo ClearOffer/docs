@@ -1,0 +1,143 @@
+---
+title: "Ashby custom field mapping"
+description: "Map Ashby custom fields to ClearOffer fields so synced offers are populated automatically."
+icon: "sliders"
+---
+
+Use custom field mapping to translate your Ashby custom fields into ClearOffer fields. When an offer syncs from Ashby, ClearOffer will fill in matching fields automatically.
+
+<Info>
+Mappings apply to offers created or updated after you save them. Existing offers aren’t retroactively changed.
+</Info>
+
+## Add or edit a mapping
+
+<Steps>
+<Step title="Open Integrations → Ashby">
+From the Ashby card, click “Show Custom Fields”.
+</Step>
+
+<Step title="Add mapping">
+Click “Add Mapping”, enter the exact Ashby custom field name, then choose a ClearOffer field from the dropdown.
+
+<Tip>
+Field names must match Ashby exactly (including spaces and casing).
+</Tip>
+</Step>
+
+<Step title="Save">
+Click “Save Mapping”. Repeat for each field you’d like to map.
+</Step>
+
+<Step title="Edit or delete">
+Use the row actions to update or remove a mapping. Deletions require confirmation.
+</Step>
+</Steps>
+
+## Rules and recommendations
+
+- Each ClearOffer field can be mapped at most once
+- Each Ashby field name can appear at most once
+- Use simple, unambiguous Ashby field titles
+- Test with a single offer before rolling out broadly
+
+<Tip>
+- Use “Equity Shares (Number)” for numeric equity values
+- “Base Salary Override” will replace the salary sent by Ashby
+</Tip>
+
+## Available ClearOffer fields
+
+<AccordionGroup>
+<Accordion title="Candidate fields">
+- Candidate First Name
+- Candidate Last Name
+- Candidate Phone Number
+</Accordion>
+
+<Accordion title="Core offer fields">
+- Job Title/Role
+- Department
+- Location
+- Reporting To
+- Base Salary Override
+- Currency
+- Payment Frequency
+- Welcome Message
+- Start Date
+- Expiration Date
+</Accordion>
+
+<Accordion title="Equity fields">
+- Equity Shares (Number)
+- Equity Type
+- Years Vesting
+- Cliff Period (Months)
+- Strike Price
+- Preferred Price
+- Outstanding Shares
+- Company Valuation
+</Accordion>
+
+<Accordion title="Commission fields">
+- Commission Type
+- Commission Target Amount
+- Commission Base Rate
+- Commission Quota Amount
+- Commission Payout Frequency
+- Commission Has Accelerators
+- Commission Details
+</Accordion>
+
+<Accordion title="Bonus fields">
+- Bonus Type
+- Bonus Name
+- Bonus Amount
+- Bonus Amount Type
+- Bonus Currency
+- Bonus Frequency
+- Bonus Description
+</Accordion>
+</AccordionGroup>
+
+## Examples
+
+<CardGroup cols={2}>
+<Card title="Map department" icon="building">
+Ashby “Department” → ClearOffer “Department”
+
+Keeps your org structure consistent between systems.
+</Card>
+
+<Card title="Import equity details" icon="circle-stack">
+Ashby “Equity Shares (Number)” → ClearOffer “Equity Shares (Number)” and optionally map “Preferred Price” and “Strike Price”.
+
+ClearOffer will create equity details using your company defaults when values aren’t provided.
+</Card>
+</CardGroup>
+
+## Troubleshooting
+
+<AccordionGroup>
+<Accordion title="My mapping didn’t apply">
+- Confirm the Ashby field title exactly matches what’s in Ashby
+- Ensure the offer was created/updated after the mapping was saved
+- Verify the relevant webhook event (Create/Update) is enabled
+</Accordion>
+
+<Accordion title="Duplicates prevented">
+The UI blocks duplicate Ashby field names and duplicate ClearOffer fields to avoid conflicts.
+</Accordion>
+
+<Accordion title="Equity values not recognized">
+Ensure “Equity Shares (Number)” is a numeric field in Ashby. Non‑numeric values can’t be imported.
+</Accordion>
+</AccordionGroup>
+
+## See also
+
+<Card title="Connect Ashby" icon="plug" href="/integrations/ashby">
+Set up the Ashby integration and verify your connection.
+</Card>
+
+
