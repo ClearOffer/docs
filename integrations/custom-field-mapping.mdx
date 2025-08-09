@@ -36,14 +36,20 @@ Use the row actions to update or remove a mapping. Deletions require confirmatio
 
 ## Rules and recommendations
 
-- Each ClearOffer field can be mapped at most once
+<CardGroup cols={2}>
+<Card title="Mapping rules" icon="triangle-exclamation">
+- Each ClearOffer field can be mapped at most once  
 - Each Ashby field name can appear at most once
-- Use simple, unambiguous Ashby field titles
+</Card>
+
+<Card title="Best practices" icon="lightbulb">
+- Use simple, unambiguous Ashby field titles  
 - Test with a single offer before rolling out broadly
+</Card>
+</CardGroup>
 
 <Tip>
-- Use “Equity Shares (Number)” for numeric equity values
-- “Base Salary Override” will replace the salary sent by Ashby
+Use “Equity Shares (Number)” for numeric equity values. “Base Salary Override” will replace the salary from Ashby.
 </Tip>
 
 ## Available ClearOffer fields
@@ -109,7 +115,7 @@ Ashby “Department” → ClearOffer “Department”
 Keeps your org structure consistent between systems.
 </Card>
 
-<Card title="Import equity details" icon="circle-stack">
+<Card title="Import equity details" icon="coins">
 Ashby “Equity Shares (Number)” → ClearOffer “Equity Shares (Number)” and optionally map “Preferred Price” and “Strike Price”.
 
 ClearOffer will create equity details using your company defaults when values aren’t provided.

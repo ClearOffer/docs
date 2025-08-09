@@ -1,40 +1,60 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mint Starter Kit",
+  "name": "ClearOffer",
   "colors": {
     "primary": "#16A34A",
     "light": "#07C983",
     "dark": "#15803D"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/favicon.ico",
   "navigation": {
-    "tabs": [
-      {
-        "tab": "Guides",
         "groups": [
           {
             "group": "Getting started",
             "pages": [
-              "index",
-              "quickstart",
-              "development"
+              "getting-started/signup-and-verification",
+              "getting-started/accept-invitation",
+              "getting-started/login-and-passwords"
+            ]
+          },
+          
+          {
+            "group": "Offers",
+            "pages": [
+              "offers/create-an-offer",
+              "offers/compensation",
+              "offers/equity",
+              "offers/benefits-and-perks",
+              "offers/preview-and-summary",
+              "offers/nda-and-attachments",
+              "offers/status-and-lifecycle",
+              "offers/sharing-an-offer",
+              "offers/candidate-experience"
             ]
           },
           {
-            "group": "Customization",
+            "group": "Company",
             "pages": [
-              "essentials/settings",
-              "essentials/navigation"
+              "company/branding",
+              "company/settings",
+              "company/manage-users",
+              "company/benefit-templates",
+              "company/salary-equity-bands",
+              "company/internal-equity",
+              "company/valuation-and-comparables"
             ]
           },
           {
-            "group": "Writing content",
+            "group": "Account",
             "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
+              "account/user-settings"
+            ]
+          },
+          {
+            "group": "Billing",
+            "pages": [
+              "billing/billing-and-invoices"
             ]
           },
           {
@@ -45,47 +65,24 @@
             ]
           },
           {
-            "group": "AI tools",
+            "group": "Updates",
             "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "API reference",
-        "groups": [
-          {
-            "group": "API documentation",
-            "pages": [
-              "api-reference/introduction"
+              "updates/whats-new"
             ]
           },
           {
-            "group": "Endpoint examples",
+            "group": "Support",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "support/feedback"
             ]
           }
-        ]
-      }
-    ],
+        ],
     "global": {
       "anchors": [
         {
           "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Community",
-          "href": "https://mintlify.com/community",
-          "icon": "slack"
+          "href": "https://docs.clearoffer.io/",
+          "icon": "book-open"
         },
         {
           "anchor": "Blog",

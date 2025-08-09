@@ -6,9 +6,15 @@ icon: "plug"
 
 Connect your Ashby ATS so approved offers in Ashby automatically appear in ClearOffer as unpublished offers that you can review and send.
 
-<Info>
-This guide is for ClearOffer users with permission to manage integrations in their workspace and Ashby admins who can create API keys.
-</Info>
+<CardGroup cols={2}>
+<Card title="Who should use this" icon="user">
+Workspace admins in ClearOffer and Ashby admins who can create API keys.
+</Card>
+
+<Card title="What you’ll get" icon="sparkles">
+Approved Ashby offers automatically appear in ClearOffer, with optional custom field mapping.
+</Card>
+</CardGroup>
 
 ## Prerequisites
 
@@ -45,8 +51,8 @@ Treat your API key like a password. Do not share it in chat or tickets.
 <Step title="Choose events">
 Select which Ashby events should sync to ClearOffer:
 
-- Offer Create — create a new offer in ClearOffer when a new offer is created in Ashby
-- Offer Update — update the matching offer in ClearOffer when it changes in Ashby
+- <strong>Offer Create</strong> — create a new ClearOffer when a new offer is created in Ashby
+- <strong>Offer Update</strong> — update the matching offer in ClearOffer when it changes in Ashby
 </Step>
 
 <Step title="Configure">
@@ -60,12 +66,23 @@ You should see a “Connected” badge on the Ashby card once setup is complete.
 
 ## What gets synced
 
-- Approved offers in Ashby are created/updated in ClearOffer
-- Candidate details (name, email, phone when available)
-- Base salary and currency
-- Start date
-- Job title (role)
-- Optional fields you map via Custom Field Mapping (see below)
+<CodeGroup>
+```text Offer basics
+Approved Ashby offers are created/updated in ClearOffer.
+```
+
+```text Candidate details
+Name, email, phone (when available).
+```
+
+```text Compensation
+Base salary, currency, start date, and job title.
+```
+
+```text Custom mappings
+Anything you map via Custom Field Mapping (below).
+```
+</CodeGroup>
 
 <Info>
 Only offers in Ashby that are ready for candidate delivery are synced. Drafts or unapproved offers aren’t imported.
