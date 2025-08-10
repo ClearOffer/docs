@@ -1,32 +1,34 @@
 ---
 title: "Ashby custom field mapping"
-description: "Map Ashby custom fields to ClearOffer fields so synced offers are populated automatically."
+description: "Map Ashby custom fields to ClearOffer fields to automatically populate your offers."
 icon: "sliders"
 ---
 
-Use custom field mapping to translate your Ashby custom fields into ClearOffer fields. When an offer syncs from Ashby, ClearOffer will fill in matching fields automatically.
+Use custom field mapping to translate your Ashby `Offer` custom fields into ClearOffer fields. When an offer is created or updated in Ashby, ClearOffer will fill in matching fields automatically.
 
 <Info>
-Mappings apply to offers created or updated after you save them. Existing offers aren’t retroactively changed.
+Mappings only apply to offers that were created via the Ashby Integration. Existing offers created without using the Ashby integration aren't retroactively changed.
+
+After creating a custom field mapping, you will need to make a new update to an offer in Ashby for the mapping to take effect.
 </Info>
 
 ## Add or edit a mapping
 
 <Steps>
-<Step title="Open Integrations → Ashby">
-From the Ashby card, click “Show Custom Fields”.
+<Step title="Open ClearOffer">
+Open ClearOffer and click on the `Company` toggle in the sidebar, then click on `Integrations` to open the Integrations page.
 </Step>
 
-<Step title="Add mapping">
-Click “Add Mapping”, enter the exact Ashby custom field name, then choose a ClearOffer field from the dropdown.
+<Step title="Show Custom Fields">
+Within the Ashby card, click on the `Show Custom Fields` button.
+</Step>
+
+<Step title="Add Mapping">
+Click `Add Mapping`, enter the exact Ashby custom field name, then choose a ClearOffer field from the dropdown.
 
 <Tip>
 Field names must match Ashby exactly (including spaces and casing).
 </Tip>
-</Step>
-
-<Step title="Save">
-Click “Save Mapping”. Repeat for each field you’d like to map.
 </Step>
 
 <Step title="Edit or delete">
@@ -38,19 +40,17 @@ Use the row actions to update or remove a mapping. Deletions require confirmatio
 
 <CardGroup cols={2}>
 <Card title="Mapping rules" icon="triangle-exclamation">
-- Each ClearOffer field can be mapped at most once  
-- Each Ashby field name can appear at most once
+Each ClearOffer field can be mapped at most once.
+
+Each Ashby field name can appear at most once.
 </Card>
 
 <Card title="Best practices" icon="lightbulb">
-- Use simple, unambiguous Ashby field titles  
-- Test with a single offer before rolling out broadly
+Use simple, unambiguous Ashby field titles.
+
+Test with a single offer before rolling out broadly.
 </Card>
 </CardGroup>
-
-<Tip>
-Use “Equity Shares (Number)” for numeric equity values. “Base Salary Override” will replace the salary from Ashby.
-</Tip>
 
 ## Available ClearOffer fields
 
@@ -58,7 +58,6 @@ Use “Equity Shares (Number)” for numeric equity values. “Base Salary Overr
 <Accordion title="Candidate fields">
 - Candidate First Name
 - Candidate Last Name
-- Candidate Phone Number
 </Accordion>
 
 <Accordion title="Core offer fields">
@@ -110,25 +109,25 @@ Use “Equity Shares (Number)” for numeric equity values. “Base Salary Overr
 
 <CardGroup cols={2}>
 <Card title="Map department" icon="building">
-Ashby “Department” → ClearOffer “Department”
+Ashby `Department` → ClearOffer `Department`
 
 Keeps your org structure consistent between systems.
 </Card>
 
 <Card title="Import equity details" icon="coins">
-Ashby “Equity Shares (Number)” → ClearOffer “Equity Shares (Number)” and optionally map “Preferred Price” and “Strike Price”.
+Ashby `Equity` → ClearOffer `Equity Shares (Number)`.
 
-ClearOffer will create equity details using your company defaults when values aren’t provided.
+ClearOffer will create equity details using your company defaults when values aren't provided.
 </Card>
 </CardGroup>
 
 ## Troubleshooting
 
 <AccordionGroup>
-<Accordion title="My mapping didn’t apply">
-- Confirm the Ashby field title exactly matches what’s in Ashby
+<Accordion title="My mapping didn't apply">
+- Confirm the Ashby field title exactly matches what's in Ashby, and it is an `Offer` custom field
 - Ensure the offer was created/updated after the mapping was saved
-- Verify the relevant webhook event (Create/Update) is enabled
+- Verify the relevant webhook event (Create/Update) is enabled in Ashby
 </Accordion>
 
 <Accordion title="Duplicates prevented">
@@ -136,7 +135,7 @@ The UI blocks duplicate Ashby field names and duplicate ClearOffer fields to avo
 </Accordion>
 
 <Accordion title="Equity values not recognized">
-Ensure “Equity Shares (Number)” is a numeric field in Ashby. Non‑numeric values can’t be imported.
+Ensure `Equity Shares (Number)` is a `Number` field in Ashby. Non-numeric values can't be imported.
 </Accordion>
 </AccordionGroup>
 
