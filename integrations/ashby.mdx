@@ -7,11 +7,7 @@ icon: "plug"
 Connect your Ashby ATS so approved offers in Ashby automatically appear in ClearOffer as unpublished offers that you can review and send.
 
 <CardGroup cols={2}>
-<Card title="Who should use this" icon="user">
-Workspace admins in ClearOffer and Ashby admins who can create API keys.
-</Card>
-
-<Card title="What you’ll get" icon="sparkles">
+<Card title="What you'll get" icon="sparkles">
 Approved Ashby offers automatically appear in ClearOffer, with optional custom field mapping.
 </Card>
 </CardGroup>
@@ -19,29 +15,56 @@ Approved Ashby offers automatically appear in ClearOffer, with optional custom f
 ## Prerequisites
 
 - Ashby admin access (to create an API key)
-- ClearOffer account with access to the Integrations page
-
-<Tip>
-When creating your Ashby API key, ensure it has:
-
-- Candidate Read
-- API Key Read and Write
-- “Allow access to confidential jobs and projects?” enabled
-</Tip>
 
 ## Connect Ashby
 
 <Steps>
-<Step title="Open Integrations">
-Go to Settings → Integrations inside ClearOffer.
+<Step title="Open Ashby">
+Go to Ashby and navigate to the Admin panel.
 </Step>
 
-<Step title="Start connection">
-In the Ashby card, click “Connect Ashby”.
+<Step title="Navigate to Integrations">
+From the left sidebar, click on `Integrations`.
 </Step>
 
-<Step title="Enter API key">
-Paste your Ashby API key into the “Ashby API Key” field.
+<Step title="Search for ClearOffer">
+On the Integrations page, search for `ClearOffer`.
+</Step>
+
+<Step title="Create API Key for ClearOffer">
+Click on the ClearOffer card to open the integration settings, and then click on `Create API Key for ClearOffer`.
+</Step>
+
+<Step title="Copy the API Key">
+Copy the API Key and save it somewhere safe and secure.
+</Step>
+
+<Step title="View API Key Settings">
+Close the API Key modal, then click on `View API Key Settings` button.
+</Step>
+
+<Step title="Update API Key Settings">
+Within the API Key Settings, under `Other Permissions`, check the box for `Allow access to confidential jobs and projects?`, and then click on the `Save` button.
+
+<Tip>
+When creating your Ashby API key, if you want to scope the API key based on principle of least privilege, ensure it only has the following permissions:
+
+- Candidate Read
+- Hiring Process Metadata Read
+- Offers Read and Write
+- API Key Read and Write
+- “Allow access to confidential jobs and projects?” checked
+![Ashby API Key Settings](/images/ashby-api-key-settings.png)
+</Tip>
+</Step>
+
+
+<Step title="Open ClearOffer">
+Open ClearOffer and click on the `Company` toggle in the sidebar, then click on `Integrations` to open the Integrations page.
+</Step>
+
+<Step title="Setup Ashby Connection">
+In the Ashby card, click `Connect Ashby`, and paste the API key you copied earlier.
 
 <Warning>
 Treat your API key like a password. Do not share it in chat or tickets.
@@ -56,36 +79,24 @@ Select which Ashby events should sync to ClearOffer:
 </Step>
 
 <Step title="Configure">
-Click “Configure Integration”. ClearOffer will validate your key and automatically create the required webhooks in Ashby.
+Click `Configure Integration`. ClearOffer will validate your key and automatically create the required webhooks in Ashby.
 
 <Check>
-You should see a “Connected” badge on the Ashby card once setup is complete.
+You should see a `Connected` badge on the Ashby card once setup is complete.
 </Check>
 </Step>
 </Steps>
 
 ## What gets synced
 
-<CodeGroup>
-```text Offer basics
-Approved Ashby offers are created/updated in ClearOffer.
-```
-
-```text Candidate details
-Name, email, phone (when available).
-```
-
-```text Compensation
-Base salary, currency, start date, and job title.
-```
-
-```text Custom mappings
-Anything you map via Custom Field Mapping (below).
-```
-</CodeGroup>
+| Data Type | What Gets Synced |
+|-----------|------------------|
+| Basic Info | Name, email, role, start date |
+| Compensation | Base salary, currency |
+| Custom fields | Any custom fields you map via Custom Field Mapping (Equity details, department, location, manager, etc). |
 
 <Info>
-Only offers in Ashby that are ready for candidate delivery are synced. Drafts or unapproved offers aren’t imported.
+Only offers in Ashby that are ready for candidate delivery are synced. Drafts or unapproved offers aren't imported.
 </Info>
 
 ## Verify the connection
@@ -94,44 +105,26 @@ Only offers in Ashby that are ready for candidate delivery are synced. Drafts or
 - In ClearOffer, check your Offers list for a new unpublished offer
 - If Offer Update is enabled, make a small change in Ashby and confirm it updates in ClearOffer
 
-## Manual webhook setup (only if prompted)
-
-ClearOffer attempts to create webhooks in Ashby for you. If that fails, you’ll see in‑app guidance with the exact URL and event types to add.
-
-<AccordionGroup>
-<Accordion title="Add webhooks in Ashby">
-1. In Ashby, go to Admin → Integrations → Webhooks
-2. Create a webhook for each selected event (Offer Create, Offer Update)
-3. Use the Request URL shown in ClearOffer’s Integrations page
-4. Enable the webhook(s) and save
-
-<Tip>
-If you don’t see the URL in ClearOffer, contact your workspace admin or support.
-</Tip>
-</Accordion>
-</AccordionGroup>
-
 ## Troubleshooting
 
 <AccordionGroup>
 <Accordion title="Invalid API key or permissions">
-Regenerate the key in Ashby with the required permissions and re‑enter it in ClearOffer.
+Regenerate the key in Ashby with the required permissions and re-enter it in ClearOffer.
 </Accordion>
 
 <Accordion title="Connected but no offers appear">
-- Confirm the offer in Ashby is approved and ready for candidate delivery
-- Ensure you enabled the relevant event (Offer Create or Offer Update)
-- Wait a minute and refresh the Offers page
+- Confirm the offer in Ashby is approved and ready for candidate delivery (status is `WaitingOnCandidateResponse`)
+- Ensure you enabled the relevant event (`Offer Create` or `Offer Update`)
 </Accordion>
 
-<Accordion title="We couldn’t auto‑create webhooks">
-Follow the in‑app manual setup steps or contact support with a timestamp of your attempt.
+<Accordion title="We couldn't auto-create webhooks">
+Follow the in-app manual setup steps or contact support with a timestamp of your attempt.
 </Accordion>
 </AccordionGroup>
 
 ## Next steps
 
-Map your Ashby custom fields to ClearOffer so additional information (like equity details, departments, or welcome messages) is populated automatically.
+Map your Ashby custom fields to ClearOffer so additional information (like equity details, department, location, welcome messages, etc) is populated automatically.
 
 <Card title="Set up custom field mapping" icon="sliders" href="/integrations/custom-field-mapping">
 Map Ashby custom fields to ClearOffer fields to enrich synced offers.
