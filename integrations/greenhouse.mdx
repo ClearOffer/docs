@@ -96,14 +96,11 @@ On the offer page, click `Share`. From the Dashboard, you can also click the `..
 | Change in Greenhouse | ClearOffer offer status | What happens in ClearOffer |
 |---|---|---|
 | Any update | `Unpublished` | The offer updates automatically |
-| Edit to the same offer | Any other status | The offer updates and its status stays the same. A candidate who opens the link sees the new details. If the change affects a generated offer letter document, the candidate can't view or sign it until you generate a new link |
-| New version of the offer | Any other status | ClearOffer creates a new `Unpublished` offer. Review and share it. The original offer and link don't change |
+| Any update | `Published` or `Viewed` | The offer updates and its status stays the same. The candidate sees the new details at the same link. If the change affects a generated offer letter document, the candidate can't view or sign it until you generate a new link |
+| Edit to the same offer version | `Accepted`, `Declined`, or another closed status | The offer updates and its status stays the same |
+| New version of the offer | `Accepted`, `Declined`, or another closed status | ClearOffer creates a new `Unpublished` offer. Review and share it. The original offer doesn't change |
 
 Greenhouse marks the offer fields that create a new version with a cycle icon on the offer form, and shows the note `Changing any of these fields will trigger a new offer version`. Salary is one of them. Start date isn't.
-
-<Warning>
-When a new version is created, Greenhouse sends ClearOffer the old version and the new version at the same moment. The older values can occasionally end up on an unpublished ClearOffer offer. After changing a field like salary, check the value in ClearOffer before you share the offer. If it's out of date, make another edit to the offer in Greenhouse.
-</Warning>
 
 A few things to keep in mind:
 
@@ -124,17 +121,14 @@ A few things to keep in mind:
 | Salary custom field amount | Base Salary |
 | Salary custom field currency | Currency |
 | Offer custom field with the key `location` | Location |
+| Offer custom field with the key `department` | Department |
 | User who created the offer, matched by email address | The recruiter on the offer |
 
 <Note>
 Salary comes from an offer custom field with a **Currency** value. The field must be marked as base compensation in Greenhouse, or have "salary" in its field key. If your salary field is a plain number, map it to `Base Salary Override` instead. Otherwise, the offer comes through with a $0 salary.
 </Note>
 
-<Warning>
-Department doesn't sync on its own, even when the job has a department in Greenhouse. To fill it in, create an offer custom field for department in Greenhouse and map it to `Department`. If it isn't mapped, each update leaves Department blank in ClearOffer.
-</Warning>
-
-ClearOffer fills in the rest from your company settings or its standard defaults. That includes the welcome message, offer expiration, and any equity pricing. Pay frequency starts as biweekly and employment type starts as full-time.
+ClearOffer fills in the rest from your company settings or its standard defaults. That includes the welcome message, offer expiration, and any equity pricing. Pay frequency starts as biweekly and employment type starts as full-time. Any field with a default in ClearOffer keeps using it unless it's set on your offer in Greenhouse.
 
 ## Map custom fields
 
@@ -163,7 +157,7 @@ Mappings apply the next time Greenhouse sends an offer. Create or update a test 
 | ClearOffer field | What to know |
 |---|---|
 | Job Title/Role | Replaces the job name |
-| Department | Recommended, because department doesn't sync without a mapping |
+| Department | Replaces the value from the `department` custom field |
 | Team | An empty text value clears the team. A missing value leaves it unchanged |
 | Location | Replaces the value from the `location` custom field |
 | Reporting To | Works with text fields and user fields |
