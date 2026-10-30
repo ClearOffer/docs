@@ -30,13 +30,15 @@ On the Greenhouse card, click `Connect with Greenhouse`. ClearOffer sends you to
 </Step>
 
 <Step title="Authorize ClearOffer">
-Review the permissions and log in to Greenhouse if you're asked to. Select `Authorize using a service account`, then click `Authorize`.
+Enter your Greenhouse email address and click `Log in to Greenhouse`. Review the permissions, select `Authorize using a service account`, then click `Authorize`.
 
 <Tip>
 We recommend a service account. The connection then belongs to your organization rather than to one person, so it isn't tied to an individual user's account.
 </Tip>
 
-![The Greenhouse authorization page with the service account checkbox and Authorize button highlighted](/images/greenhouse/greenhouse-authorize-service-account.png)
+![The Greenhouse login step with Log in to Greenhouse highlighted](/images/greenhouse/greenhouse-login.png)
+
+![The Greenhouse permissions page with the service account checkbox and Authorize button highlighted](/images/greenhouse/greenhouse-authorize-service-account.png)
 </Step>
 
 <Step title="Check the connection">
@@ -50,7 +52,7 @@ If you see `Greenhouse Connected with Warnings`, no webhooks were created and of
 </Step>
 </Steps>
 
-ClearOffer creates two webhooks in Greenhouse for you, so there's nothing to set up by hand. To see them, click the **Configure** icon in Greenhouse, then click **Dev Center** and **Webhooks**.
+ClearOffer creates two webhooks in Greenhouse for you, so there's nothing to set up by hand. To see them, click the **Configure** icon in Greenhouse, then click **Dev Center**. Click **Webhooks**, then click **Webhooks** again. They're listed under **Edit Webhook**.
 
 | Webhook name | When it fires |
 |---|---|
@@ -66,6 +68,8 @@ ClearOffer creates two webhooks in Greenhouse for you, so there's nothing to set
 ClearOffer creates an offer with the `Unpublished` status. The candidate can't see it yet. Synced offers look the same as offers created in ClearOffer.
 
 ClearOffer creates the offer as soon as Greenhouse reports it, whether or not the offer has been approved in Greenhouse.
+
+![The Greenhouse Create Offer form with the salary amount highlighted](/images/greenhouse/greenhouse-create-offer.png)
 
 ![The dashboard with a synced offer showing the Unpublished status](/images/greenhouse/clearoffer-dashboard-synced-offer.png)
 </Step>
@@ -92,8 +96,14 @@ On the offer page, click `Share`. From the Dashboard, you can also click the `..
 | Change in Greenhouse | ClearOffer offer status | What happens in ClearOffer |
 |---|---|---|
 | Any update | `Unpublished` | The offer updates automatically |
-| Edit to the same offer | Any other status | The offer updates and its status stays the same. A candidate who opens the link sees the new details. A generated offer letter document keeps its earlier values until you generate a new link |
+| Edit to the same offer | Any other status | The offer updates and its status stays the same. A candidate who opens the link sees the new details. If the change affects a generated offer letter document, the candidate can't view or sign it until you generate a new link |
 | New version of the offer | Any other status | ClearOffer creates a new `Unpublished` offer. Review and share it. The original offer and link don't change |
+
+Greenhouse marks the offer fields that create a new version with a cycle icon on the offer form, and shows the note `Changing any of these fields will trigger a new offer version`. Salary is one of them. Start date isn't.
+
+<Warning>
+When a new version is created, Greenhouse sends ClearOffer the old version and the new version at the same moment. The older values can occasionally end up on an unpublished ClearOffer offer. After changing a field like salary, check the value in ClearOffer before you share the offer. If it's out of date, make another edit to the offer in Greenhouse.
+</Warning>
 
 A few things to keep in mind:
 
@@ -110,7 +120,6 @@ A few things to keep in mind:
 | Candidate first and last name | First Name and Last Name |
 | Candidate's first listed email address | Candidate Email |
 | Job name | Role |
-| Job's first department | Department |
 | Offer start date | Start Date |
 | Salary custom field amount | Base Salary |
 | Salary custom field currency | Currency |
@@ -120,6 +129,10 @@ A few things to keep in mind:
 <Note>
 Salary comes from an offer custom field with a **Currency** value. The field must be marked as base compensation in Greenhouse, or have "salary" in its field key. If your salary field is a plain number, map it to `Base Salary Override` instead. Otherwise, the offer comes through with a $0 salary.
 </Note>
+
+<Warning>
+Department doesn't sync on its own, even when the job has a department in Greenhouse. To fill it in, create an offer custom field for department in Greenhouse and map it to `Department`. If it isn't mapped, each update leaves Department blank in ClearOffer.
+</Warning>
 
 ClearOffer fills in the rest from your company settings or its standard defaults. That includes the welcome message, offer expiration, and any equity pricing. Pay frequency starts as biweekly and employment type starts as full-time.
 
@@ -150,7 +163,7 @@ Mappings apply the next time Greenhouse sends an offer. Create or update a test 
 | ClearOffer field | What to know |
 |---|---|
 | Job Title/Role | Replaces the job name |
-| Department | Replaces the job's department |
+| Department | Recommended, because department doesn't sync without a mapping |
 | Team | An empty text value clears the team. A missing value leaves it unchanged |
 | Location | Replaces the value from the `location` custom field |
 | Reporting To | Works with text fields and user fields |
@@ -168,15 +181,15 @@ The dropdown also lists Candidate First Name, Candidate Last Name, Candidate Pho
 
 <Steps>
 <Step title="Disconnect in ClearOffer">
-Go to `Company` > `Integrations`, click `Disconnect` on the Greenhouse card, then confirm.
+Go to `Company` > `Integrations`, click `Disconnect` on the Greenhouse card, then confirm. ClearOffer removes its webhooks from Greenhouse.
 </Step>
 
 <Step title="Check for leftover webhooks">
-In Greenhouse, go to **Configure** > **Dev Center** > **Webhooks** and delete any ClearOffer webhooks that are still listed.
+In Greenhouse, go to **Configure** > **Dev Center** > **Webhooks** > **Webhooks** and delete any ClearOffer webhooks that are still listed.
 </Step>
 
 <Step title="Revoke access in Greenhouse (optional)">
-Disconnecting in ClearOffer doesn't remove the authorization from Greenhouse. To remove it, go to **Configure** > **Dev Center** > **Connected integrations**, then disconnect ClearOffer.
+Disconnecting in ClearOffer doesn't remove the authorization from Greenhouse, and each new connection adds another entry there. To remove them, go to **Configure** > **Dev Center** > **Connected Integrations**, then disconnect ClearOffer.
 </Step>
 </Steps>
 
@@ -186,8 +199,9 @@ Your existing ClearOffer offers aren't deleted, and new Greenhouse offers stop s
 
 <AccordionGroup>
 <Accordion title="Offers aren't appearing">
-- Make sure the offer was created or updated in Greenhouse. Marking a candidate as hired isn't enough on its own
-- In Greenhouse, go to **Configure** > **Dev Center** > **Webhooks** and confirm both ClearOffer webhooks are listed
+- Make sure the candidate has an offer in Greenhouse. ClearOffer only reacts to offers, not to other candidate activity
+- In Greenhouse, go to **Configure** > **Dev Center** > **Webhooks** > **Webhooks** and confirm both ClearOffer webhooks are listed
+- In the same section, open **Webhook Log** to see whether Greenhouse delivered the offer to ClearOffer
 - If a webhook is missing, disconnect in ClearOffer, delete any ClearOffer webhooks left in Greenhouse, and connect again
 
 The `Connected` badge means ClearOffer holds a Greenhouse authorization. It doesn't confirm that offers are syncing, and ClearOffer doesn't send a notification when a sync fails. If you can't find the problem, email [support@clearoffer.io](mailto:support@clearoffer.io) with the candidate's name and the time the offer was changed.
