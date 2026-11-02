@@ -119,15 +119,13 @@ A few things to keep in mind:
 | Offer start date | Start Date |
 | Salary custom field amount | Base Salary |
 | Salary custom field currency | Currency |
-| Offer custom field with the key `location` | Location |
-| Offer custom field with the key `department` | Department |
 | User who created the offer, matched by email address to a member of your company | The recruiter on the offer |
 
 <Note>
 Salary comes from an offer custom field with a **Currency** value, either marked as base compensation in Greenhouse or with "salary" in its field key. Amounts paid on another schedule are converted to an annual salary. If your salary field is a plain number, map it to `Base Salary Override`.
 </Note>
 
-ClearOffer fills in the rest from your company settings or its standard defaults. That includes the welcome message, offer expiration, and any equity pricing. Pay frequency and employment type use your company defaults, or biweekly and full-time if you haven't set them.
+Other offer details come from your ClearOffer company settings or standard defaults, or any custom field mappings you have configured.
 
 ## Map custom fields
 
@@ -159,9 +157,9 @@ Mappings apply the next time Greenhouse sends an offer. Create or update a test 
 | Candidate Last Name | Replaces the last name from the candidate's record |
 | Candidate Phone Number | Adds the candidate's phone number |
 | Job Title/Role | Replaces the job name |
-| Department | Replaces the value from the `department` custom field |
+| Department | Sets the department |
 | Team | Sets the team |
-| Location | Replaces the value from the `location` custom field |
+| Location | Sets the location |
 | Reporting To | Works with text fields and user fields |
 | Base Salary Override | Must be a number, and replaces the salary amount |
 | Currency | Use a three-letter code such as `EUR`. Replaces the salary field's currency |
