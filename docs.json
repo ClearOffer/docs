@@ -61,6 +61,7 @@
             "group": "Integrations",
             "pages": [
               "integrations/ashby",
+              "integrations/greenhouse",
               "integrations/custom-field-mapping"
             ]
           },
