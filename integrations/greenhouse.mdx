@@ -46,9 +46,6 @@ Greenhouse sends you back to ClearOffer. The Greenhouse card now shows a `Connec
 
 ![The Greenhouse card showing the Connected badge](/images/greenhouse/clearoffer-connected.png)
 
-<Warning>
-If you see `Greenhouse Connected with Warnings`, no webhooks were created and offers won't sync. If only one webhook fails, the `Greenhouse Connected` message says so. See [Offers aren't appearing](#offers-arent-appearing).
-</Warning>
 </Step>
 </Steps>
 
@@ -67,7 +64,7 @@ ClearOffer creates two webhooks in Greenhouse for you, so there's nothing to set
 <Step title="An offer is created in Greenhouse">
 ClearOffer creates an offer with the `Unpublished` status. The candidate can't see it yet. Synced offers look the same as offers created in ClearOffer.
 
-ClearOffer creates the offer as soon as Greenhouse reports it, whether or not the offer has been approved in Greenhouse.
+ClearOffer creates the offer as soon as Greenhouse reports it.
 
 ![The Greenhouse Create Offer form with the salary amount highlighted](/images/greenhouse/greenhouse-create-offer.png)
 
@@ -79,9 +76,9 @@ On the Dashboard, click the `...` menu on the offer and then `View Details`. Cli
 
 ![The offer page showing synced details, with Share and Edit Offer highlighted](/images/greenhouse/clearoffer-offer-detail.png)
 
-<Warning>
-Always review an offer before you share it. If ClearOffer can't get a value from Greenhouse, it uses a placeholder or a default. Look for a role of `New Hire`, a salary of `$0`, a candidate named `Greenhouse Candidate`, or an email address ending in `temp.clearoffer.io`. Equity values that don't come from Greenhouse also use defaults, so check them closely.
-</Warning>
+<Tip>
+Review each offer before you share it, including any equity values that come from your company settings.
+</Tip>
 </Step>
 
 <Step title="Share it with the candidate">
@@ -96,19 +93,21 @@ On the offer page, click `Share`. From the Dashboard, you can also click the `..
 | Change in Greenhouse | ClearOffer offer status | What happens in ClearOffer |
 |---|---|---|
 | Any update | `Unpublished` | The offer updates automatically |
-| Any update | `Published` or `Viewed` | The offer updates and its status stays the same. The candidate sees the new details at the same link. If the change affects a generated offer letter document, the candidate can't view or sign it until you generate a new link |
-| Edit to the same offer version | `Accepted`, `Declined`, or another closed status | The offer updates and its status stays the same |
-| New version of the offer | `Accepted`, `Declined`, or another closed status | ClearOffer creates a new `Unpublished` offer. Review and share it. The original offer doesn't change |
+| Any update | `Published` or `Viewed` | The offer updates and its status stays the same. The candidate sees the new details at the same link. If the change affects a generated offer letter document, generate a new link so the candidate gets the updated document |
+| Update to the same offer version | `Accepted`, `Declined`, or another closed status | The offer keeps the terms the candidate decided on. If Greenhouse now has different values, the recruiter gets an email listing them |
+| New version of the offer | `Accepted`, `Declined`, or another closed status | ClearOffer creates a new `Unpublished` offer. Review and share it. The original offer stays as it was |
+| Candidate rejected | `Unpublished`, `Published`, or `Viewed` | The offer's status changes to `Declined` |
+| Candidate marked as hired | Any | The offer stays as it is |
 
-Greenhouse marks the offer fields that create a new version with a cycle icon on the offer form, and shows the note `Changing any of these fields will trigger a new offer version`. Salary is one of them. Start date isn't.
+Greenhouse marks the offer fields that create a new version with a cycle icon on the offer form, and shows the note `Changing any of these fields will trigger a new offer version`. Salary is one of them.
 
 A few things to keep in mind:
 
-- **Greenhouse wins for synced fields.** Each update replaces the role, department, location, reporting manager, salary, currency, and candidate name and email in ClearOffer, including edits you made there. A blank value in Greenhouse replaces what's in ClearOffer too, and a missing salary becomes `$0`. Make lasting changes in Greenhouse.
-- **Other details stay as they are.** Updates don't change the offer's status, expiration date, pay frequency, bonuses, benefits, commission, or documents.
-- **A candidate's unpublished offer gets reused.** If a candidate already has an unpublished offer in ClearOffer, a new Greenhouse offer for that candidate updates it rather than creating a second one, even if you created it by hand.
-- **Changing a candidate's email breaks the shared link.** If the email changes in Greenhouse, the earlier link stops working. Generate a new link and send it to the candidate.
-- **Failed lookups can affect shared offers.** If ClearOffer can't reach Greenhouse during an update, the placeholders described above can replace details on an offer that's already been shared. If that happens, correct the offer and contact support.
+- **Greenhouse is the source of truth for synced fields.** Each update brings in the latest role, department, location, reporting manager, salary, currency, and candidate name. Make lasting changes to these fields in Greenhouse.
+- **Everything else stays as you set it.** Bonuses, benefits, commission, and documents carry over through updates, along with the expiration date and pay frequency unless you've mapped those fields.
+- **Blank fields keep saved values.** A field that's empty in Greenhouse never replaces a value already on the offer.
+- **Each job has its own offer.** New versions continue the same ClearOffer offer and link while it's open. A candidate with offers on two jobs gets a separate offer for each, and offers you create by hand in ClearOffer stay separate.
+- **Links stay the same.** If a candidate's email changes in Greenhouse, or their records are merged, the offer and its link keep working under the original email.
 
 ## What gets synced
 
@@ -122,10 +121,10 @@ A few things to keep in mind:
 | Salary custom field currency | Currency |
 | Offer custom field with the key `location` | Location |
 | Offer custom field with the key `department` | Department |
-| User who created the offer, matched by email address | The recruiter on the offer |
+| User who created the offer, matched by email address to a member of your company | The recruiter on the offer |
 
 <Note>
-Salary comes from an offer custom field with a **Currency** value. The field must be marked as base compensation in Greenhouse, or have "salary" in its field key. If your salary field is a plain number, map it to `Base Salary Override` instead. Otherwise, the offer comes through with a $0 salary.
+Salary comes from an offer custom field with a **Currency** value. A field marked as base compensation in Greenhouse comes first, then one with "salary" in its field key, and amounts paid on another schedule are converted to an annual salary. If your salary field is a plain number, map it to `Base Salary Override`.
 </Note>
 
 ClearOffer fills in the rest from your company settings or its standard defaults. That includes the welcome message, offer expiration, and any equity pricing. Pay frequency and employment type use your company defaults, or biweekly and full-time if you haven't set them. Any field with a default in ClearOffer keeps using it unless it's set on your offer in Greenhouse.
@@ -156,20 +155,31 @@ Mappings apply the next time Greenhouse sends an offer. Create or update a test 
 
 | ClearOffer field | What to know |
 |---|---|
+| Candidate First Name | Replaces the first name from the candidate's record |
+| Candidate Last Name | Replaces the last name from the candidate's record |
+| Candidate Phone Number | Adds the candidate's phone number |
 | Job Title/Role | Replaces the job name |
 | Department | Replaces the value from the `department` custom field |
-| Team | An empty text value clears the team. A missing value leaves it unchanged |
+| Team | Replaces the team when the field has a value |
 | Location | Replaces the value from the `location` custom field |
 | Reporting To | Works with text fields and user fields |
 | Base Salary Override | Must be a number, and replaces the salary amount |
+| Currency | Use a three-letter code such as `EUR`. Replaces the salary field's currency |
+| Payment Frequency | Use `Weekly`, `Biweekly`, `Twice a month`, or `Monthly`. Replaces your company default |
 | Employment Type | Use a value such as `Full-time`, `Part-time`, or `Contractor` |
 | Welcome Message | Replaces your company's default message |
+| Start Date | Use a date in `YYYY-MM-DD` format. Replaces the offer's start date |
+| Expiration Date | Use a date in `YYYY-MM-DD` format. Replaces your company's default expiration |
 | Equity Shares (Number) | The number of shares, not a dollar amount |
-| Equity Type | Use `stock_options` or `rsus`. Only applies when Equity Shares is also mapped |
+| Equity Type | Use a value such as `Stock Options` or `RSUs`. Only applies when Equity Shares is also mapped |
+| Years Vesting | A whole number of years |
+| Cliff Period (Months) | A whole number of months |
 
-<Warning>
-The dropdown also lists Candidate First Name, Candidate Last Name, Candidate Phone Number, Currency, Payment Frequency, Start Date, Expiration Date, Years Vesting, and Cliff Period (Months). Mappings to these fields aren't applied to synced offers right now, so set these values in ClearOffer. Candidate names, start date, and currency still sync automatically from Greenhouse, so the next update can overwrite those values.
-</Warning>
+## Keep the connection healthy
+
+ClearOffer keeps its Greenhouse connection current for you and watches each sync. If an offer can't sync, Greenhouse retries it automatically and the offer stays as it was.
+
+If something needs you, the Greenhouse card shows a `Needs Attention` badge and your company's Admins get an email. To fix a connection, click `Reconnect Greenhouse` on the card and authorize again. ClearOffer replaces its webhooks and syncing picks up with the next offer change. The person who starts the connection finishes it, signed in to ClearOffer.
 
 ## Disconnect Greenhouse
 
@@ -183,26 +193,22 @@ In Greenhouse, go to **Configure** > **Dev Center** > **Webhooks** > **Webhooks*
 </Step>
 
 <Step title="Revoke access in Greenhouse (optional)">
-Disconnecting in ClearOffer doesn't remove the authorization from Greenhouse, and each new connection adds another entry there. To remove them, go to **Configure** > **Dev Center** > **Connected Integrations**, then disconnect ClearOffer.
+To also remove the authorization from Greenhouse, go to **Configure** > **Dev Center** > **Connected Integrations**, then disconnect ClearOffer.
 </Step>
 </Steps>
 
-Your existing ClearOffer offers aren't deleted, and new Greenhouse offers stop syncing. Your custom field mappings are kept and apply again if you reconnect.
+Your existing offers stay in ClearOffer. Your custom field mappings are kept, and syncing picks up again when you reconnect.
 
 ## Troubleshooting
 
 <AccordionGroup>
 <Accordion title="Offers aren't appearing">
-- Make sure the candidate has an offer in Greenhouse. ClearOffer only reacts to offers, not to other candidate activity
+- Make sure the candidate has an offer in Greenhouse. ClearOffer syncs when an offer is created or updated
 - In Greenhouse, go to **Configure** > **Dev Center** > **Webhooks** > **Webhooks** and confirm both ClearOffer webhooks are listed
 - In the same section, open **Webhook Log** to see whether Greenhouse delivered the offer to ClearOffer
-- If a webhook is missing, disconnect in ClearOffer, delete any ClearOffer webhooks left in Greenhouse, and connect again
+- If a webhook is missing, disconnect in ClearOffer and connect again
 
-The `Connected` badge means ClearOffer holds a Greenhouse authorization. It doesn't confirm that offers are syncing, and ClearOffer doesn't send a notification when a sync fails. If you can't find the problem, email [support@clearoffer.io](mailto:support@clearoffer.io) with the candidate's name and the time the offer was changed.
-</Accordion>
-
-<Accordion title="An offer has placeholder details">
-If an offer shows `New Hire`, a `$0` salary, or an email address ending in `temp.clearoffer.io`, ClearOffer couldn't get that data from Greenhouse. Check that the person who authorized the connection was a Site Admin. Then correct the offer in ClearOffer, and contact support if it keeps happening.
+For more help, email [support@clearoffer.io](mailto:support@clearoffer.io) with the candidate's name and the time the offer was changed.
 </Accordion>
 
 <Accordion title="A custom field isn't in the list">
@@ -210,13 +216,13 @@ If an offer shows `New Hire`, a `$0` salary, or an email address ending in `temp
 - Confirm the field is active in Greenhouse
 - Type the field name yourself. The name doesn't have to come from the list
 
-The list can include other types of custom fields, but only offer custom fields are applied.
+Mappings use offer custom fields.
 </Accordion>
 
 <Accordion title="A mapping didn't apply">
 - Confirm the field is an offer custom field, and that its name matches Greenhouse
 - Confirm you're using one of the [fields you can map](#fields-you-can-map)
-- Update the offer in Greenhouse after saving the mapping, because mappings don't apply retroactively
+- Update the offer in Greenhouse after saving the mapping, so the mapping applies to it
 </Accordion>
 
 <Accordion title="Do I need a Harvest API key?">
